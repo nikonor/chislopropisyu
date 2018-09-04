@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title class="label" id="headTitle">Число прописью</title>
+<link rel="stylesheet" href="/st/style.css" type="text/css">
+<script language="JavaScript" src="https://yandex.st/jquery/1.7.1/jquery.js"></script>  
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+        $('.choose').keydown(function(event){
+                if(event.keyCode == 13){
+                        work();
+                }
+        });
+});
+
+function work(){
+	// alert($('#dig').val());
+	$.getJSON('/ajax',{'do_what':'dig','rnd':fnDTS(),'dig':$('#dig').val()},function(data){
+		// alert(data.string);
+		$('#string').val(data.string).focus().select();
+	});
+}
+
+function fnDTS() {
+	var now = new Date();
+	return parseInt(now.getTime().toString().substring(0, 10));
+}
+
+
+
+</script>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30664973-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+</head>
+<body>
+	<div id="darkness" style="display: none;"></div>
+
+	<div class="divHead" id="Div" align=center>	
+		Число прописью
+	</div><br>
+
+	<div class="wdDiv" id="Div" align=center>	
+		Введите цело число (не больше <b title="new">двенадцати</b> девяток:-)<input type=number class="choose" placeholder="1-999999999999" id="dig" min=1 size=1000>  и нажмите Enter<br>
+		<input type=text size=100 placeholder="тут будет ответ"  id="string"><br>
+		<span style="font-size: 70%;">Если программа ошиблась, то напиши, если не сложно. Спасибо!!</span>
+	</div><br>
+
+    <div class="wdDiv" id="rest_info" align=center>   
+        <span style="font-size: 70%;">Данный сервис поддерживает REST вызов. Пример: <b>curl  http://chislopropisyu.appspot.com/n/123456</b></span>
+    </div><br>
+
+	<div class="wdDiv" align="right" style="font-size: 70%;">
+		&copy 06-04-2012 <a href="mailto:chislopropisyu@nikonor.ru">chislopropisyu@nikonor.ru</a><br>
+	</div>
+
+
+</body>
+</html>
